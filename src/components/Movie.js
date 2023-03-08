@@ -8,6 +8,7 @@ import { useMovieFetch } from '../hooks/useMovieFetch';
 //Components
 import Spinner from './Spinner'
 import BreadCrumb from './BreadCrumb';
+import MovieInfo from './MovieInfo';
 
 //Image
 
@@ -26,6 +27,7 @@ const Movie = () => {
   return (
     <>
       <BreadCrumb movieTitle={movie.original_title} />
+      <MovieInfo movie={movie} />
     </>
   );
 };
