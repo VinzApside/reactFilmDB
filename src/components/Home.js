@@ -3,6 +3,7 @@ import React from 'react';
 import { BACKDROP_SIZE, IMAGE_BASE_URL, POSTER_SIZE } from '../config';
 import { useHomeFetch } from '../hooks/useHomeFetch';
 import NoImage from '../images/no_image.jpg';
+import Button from './Button';
 import Grid from './Grid';
 import HeroImage from './HeroImage';
 import SearchBar from './SearchBar';
@@ -39,7 +40,8 @@ const Home = () => {
           ></Thumb>
         ))}
       </Grid>
-      <Spinner />
+      {loading && <Spinner />}
+      {state.page < state.total_pages && !loading && <Button text="Load More" />}
     </>
   );
 };
