@@ -4,7 +4,7 @@ import RMDBLogo from '../../images/react-movie-logo.svg';
 import TMDBLogo from '../../images/tmdb_logo.svg';
 import { Content, LogoImg, TMDBLogoImg, Wrapper } from './Header.styles';
 
-const Header = ({ test }) => (
+const Header = () => (
   <Wrapper>
     <Content>
       <LogoImg src={RMDBLogo} alt="rmdb-logo" />

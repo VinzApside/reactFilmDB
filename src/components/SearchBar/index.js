@@ -6,7 +6,7 @@ import { Content, Wrapper } from './SearchBar.styles';
 //image
 //styles
 const SearchBar = ({ setSearchTerm }) => {
-  const [state, setState] = useState('test');
+  const [state, setState] = useState();
   const initial = useRef(true);
 
   useEffect(() => {
