@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+import UserProvider from '../context';
 import Header from './components/Header';
 import Home from './components/Home';
 import Movie from './components/Movie';
@@ -13,14 +14,16 @@ import { GlobalStyle } from './GlobalStyle';
 //Styles
 const App = () => (
   <Router className="App">
-    <Header />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/:movieId" element={<Movie />} />
-      <Route path="/*" element={<NotFound />} />
-    </Routes>
+    <UserProvider>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:movieId" element={<Movie />} />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
 
-    <GlobalStyle />
+      <GlobalStyle />
+    </UserProvider>
   </Router>
 );
 
