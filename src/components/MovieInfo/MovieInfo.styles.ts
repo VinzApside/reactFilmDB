@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 import { IMAGE_BASE_URL, BACKDROP_SIZE } from '../../config';
+// Types
+type Props = {
+  backdrop: string;
+}
 
-export const Wrapper = styled.div`
-  background: ${(props) =>
-    props.backdrop
-      ? `url('${IMAGE_BASE_URL}${BACKDROP_SIZE}${props.backdrop}')`
-      : '#000'};
+export const Wrapper = styled.div<Props>`
+  background: ${({ backdrop }) =>
+    backdrop ? `url(${IMAGE_BASE_URL}${BACKDROP_SIZE}${backdrop})` : '#000'};
   background-size: cover;
   background-position: center;
   padding: 40px 20px;
-  animation: animateMovieinfo 1s;
+  animation: animateMovieInfo 1s;
 
-  @keyframes animateMovieinfo {
+  @keyframes animatedMovieInfo {
     from {
       opacity: 0;
     }
@@ -23,10 +25,9 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   display: flex;
-  max-width: 1280px;
-
+  max-width: var(--maxWidth);
   margin: 0 auto;
-  background: rgb(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 20px;
 
   @media screen and (max-width: 768px) {
@@ -41,7 +42,7 @@ export const Text = styled.div`
   color: var(--white);
   overflow: hidden;
 
-  .rating-director {
+  .rating-directors {
     display: flex;
     justify-content: flex-start;
   }
@@ -55,8 +56,8 @@ export const Text = styled.div`
     background: #fff;
     color: #000;
     font-weight: 800;
-    border-radius: 25px;
-    margin: 0px 0 0 0;
+    border-radius: 50%;
+    margin: 0;
   }
 
   .director {

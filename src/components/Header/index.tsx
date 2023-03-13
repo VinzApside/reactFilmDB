@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 
 import RMDBLogo from '../../images/react-movie-logo.svg';
 import TMDBLogo from '../../images/tmdb_logo.svg';
-import { Content, LogoImg, TMDBLogoImg, Wrapper } from './Header.styles';
 
-const Header = () => (
+import { Wrapper, Content, LogoImg, TMDBLogoImg } from './Header.styles';
+
+const Header: React.FC = () => (
   <Wrapper>
     <Content>
-      <Link to="/">
-        <LogoImg src={RMDBLogo} alt="rmdb-logo" />
+      <Link to='/'>
+        <LogoImg src={RMDBLogo} alt='rmdb-logo' />
       </Link>
-      <TMDBLogoImg src={TMDBLogo} alt="tmdb-logo" />
+      <TMDBLogoImg src={TMDBLogo} alt='tmdb-logo' />
     </Content>
   </Wrapper>
 );

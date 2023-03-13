@@ -26,9 +26,9 @@ export const Content = styled.div`
   }
 
   input {
-    font-size: 28px;
+    font-size: var(--fontBig);
     position: absolute;
-    left: 0px;
+    left: 0;
     margin: 8px 0;
     padding: 0 0 0 60px;
     border: 0;
@@ -39,10 +39,6 @@ export const Content = styled.div`
 
     :focus {
       outline: none;
-    }
-
-    @media screen and (max-width: 720px) {
-      font-size: 28px;
     }
   }
 `;

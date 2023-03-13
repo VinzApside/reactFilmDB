@@ -1,21 +1,23 @@
 import styled from 'styled-components';
+// Types
+type Props = {
+  image: string;
+}
 
-export const Wrapper = styled.div`
-  background: ${(props) =>
-    `linear-gradient(
-      to bottom, rgba(0,0,0,0)
-      39%,rgba(0,0,0,0)
-      41%,rgba(0,0,0,0.65)
-      100%
+export const Wrapper = styled.div<Props>`
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 41%,
+      rgba(0, 0, 0, 0.65) 100%
     ),
-    url('${props.image}'), var(--darkGrey)`};
+    url(${({ image }) => image}), var(--darkGrey);
   background-size: 100%, cover;
   background-position: center;
   height: 600px;
   position: relative;
-  animation: animateHeroimage 1s;
+  animation: animateHeroImage 1s;
 
-  @keyframes animateHeroimage {
+  @keyframes animateHeroImage {
     from {
       opacity: 0;
     }
@@ -50,7 +52,7 @@ export const Text = styled.div`
 
   p {
     font-size: var(--fontMed);
-  
+
     @media screen and (max-width: 720px) {
       font-size: var(--fontSmall);
     }

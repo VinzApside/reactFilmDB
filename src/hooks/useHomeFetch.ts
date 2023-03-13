@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
-
-import API from '../API';
-import { isPersistatedState } from '../helpers';
+import { useState, useEffect } from 'react';
+// API
+import API, { Movie } from '../API';
+// Helpers
+import { isPersistedState } from '../helpers';
 
 const initialState = {
   page: 0,
-  results: [],
+  results: [] as Movie[],
   total_pages: 0,
-  total_results: 0,
+  total_results: 0
 };
 
 export const useHomeFetch = () => {
@@ -17,16 +18,17 @@ export const useHomeFetch = () => {
   const [error, setError] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const fetchMovies = async (page, searchTerm = '') => {
+  const fetchMovies = async (page: number, searchTerm = '') => {
     try {
       setError(false);
       setLoading(true);
 
       const movies = await API.fetchMovies(searchTerm, page);
 
-      setState((prev) => ({
+      setState(prev => ({
         ...movies,
-        results: page > 1 ? [...prev.results, ...movies.results] : [...movies.results],
+        results:
+          page > 1 ? [...prev.results, ...movies.results] : [...movies.results]
       }));
     } catch (error) {
       setError(true);
@@ -34,41 +36,33 @@ export const useHomeFetch = () => {
     setLoading(false);
   };
 
-  //Initial render
+  // Search and initial
   useEffect(() => {
     if (!searchTerm) {
-      const sessionState = isPersistatedState('homeState');
+      const sessionState = isPersistedState('homeState');
 
       if (sessionState) {
+        console.log('Grabbing from sessionStorage');
         setState(sessionState);
         return;
       }
     }
-
-    setState(initialState);
-    fetchMovies(1);
-  }, []);
-
-  //Search
-  useEffect(() => {
+    console.log('Grabbing from API');
     setState(initialState);
     fetchMovies(1, searchTerm);
   }, [searchTerm]);
 
-  //load more
+  // Load More
   useEffect(() => {
-    if (!isLoadingMore) {
-      return;
-    }
+    if (!isLoadingMore) return;
+
     fetchMovies(state.page + 1, searchTerm);
     setIsLoadingMore(false);
-  }, [isLoadingMore, searchTerm, state]);
+  }, [isLoadingMore, searchTerm, state.page]);
 
-  //write session storage
+  // Write to sessionStorage
   useEffect(() => {
-    if (!searchTerm) {
-      sessionStorage.setItem('homeState', JSON.stringify(state));
-    }
+    if (!searchTerm) sessionStorage.setItem('homeState', JSON.stringify(state));
   }, [searchTerm, state]);
 
   return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore };
