@@ -39,9 +39,9 @@ const Login = () => {
     <Wrapper>
       {error && <div className="error">There was an error...</div>}
       <label>Username: </label>
-      <input type="text" value="username" name="username" onChange={handleInput} />
+      <input type="text" value={username} name="username" onChange={handleInput} />
       <label>password: </label>
-      <input type="password" value="password" name="password" onChange={handleInput} />
+      <input type="password" value={password} name="password" onChange={handleInput} />
       <Button text="Login" callback={handleSubmint} />
     </Wrapper>
   );
