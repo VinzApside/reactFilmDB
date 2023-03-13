@@ -47,7 +47,7 @@ export const useHomeFetch = () => {
 
     setState(initialState);
     fetchMovies(1);
-  }, []);
+  }, [searchTerm]);
 
   //Search
   useEffect(() => {
