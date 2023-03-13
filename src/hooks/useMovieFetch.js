@@ -11,7 +11,6 @@ export const useMovieFetch = (movieId) => {
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        console.log({ movieId });
         setError(false);
         setLoading(true);
         const movie = await API.fetchMovie(movieId);
