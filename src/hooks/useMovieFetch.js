@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import API from '../API';
+import { isPersistatedState } from '../helpers';
 
 export const useMovieFetch = (movieId) => {
   const [state, setState] = useState({});
@@ -10,29 +11,40 @@ export const useMovieFetch = (movieId) => {
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        console.log({movieId});
+        console.log({ movieId });
         setError(false);
         setLoading(true);
         const movie = await API.fetchMovie(movieId);
         const credits = await API.fetchCredits(movieId);
 
         //get directors only
-        const directors = credits.crew.filter( member => member.job === 'Director');
-
-      
+        const directors = credits.crew.filter((member) => member.job === 'Director');
 
         setState({
-            ...movie,
-            actors: credits.cast,
-            directors
-        })
-
+          ...movie,
+          actors: credits.cast,
+          directors,
+        });
       } catch (error) {
         setError(true);
       }
       setLoading(false);
     };
-    fetchMovie()
+
+    const sessionState = isPersistatedState(movieId);
+    if (sessionState) {
+      setState(sessionState);
+      setLoading(false);
+      return;
+    }
+
+    fetchMovie();
   }, [movieId]);
-  return {state, loading, error}
+
+  //write to sessionStorage
+  useEffect(() => {
+    sessionStorage.setItem(movieId, JSON.stringify(state));
+  }, [movieId, state]);
+
+  return { state, loading, error };
 };
