@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import API from '../API';
-import { isPersistatedState } from '../helpers';
+import { isPersistedState } from '../helpers';
 
 export const useMovieFetch = (movieId) => {
   const [state, setState] = useState({});
@@ -31,7 +31,7 @@ export const useMovieFetch = (movieId) => {
       setLoading(false);
     };
 
-    const sessionState = isPersistatedState(movieId);
+    const sessionState = isPersistedState(movieId);
     if (sessionState) {
       setState(sessionState);
       setLoading(false);
